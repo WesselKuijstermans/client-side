@@ -10,13 +10,4 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Get('person/:id')
-  getPerson(@Param('id') id: number) {
-    return this.appService.getPerson(id);
-  }
-
-  @Get('people')
-  getPeople() {
-    return this.appService.getPeople();
-  }
 }
