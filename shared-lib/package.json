@@ -1,0 +1,8 @@
+{
+  "name": "@client-side/shared-lib",
+  "version": "0.0.1",
+  "dependencies": {
+    "@client-side/shared-lib": "file:"
+  },
+  "private": true
+}
