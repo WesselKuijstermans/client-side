@@ -8,6 +8,9 @@ import { Rating } from '../rating/rating';
 import { User } from '../user/user';
 import { UserController } from '../user/user.controller';
 import { UserService } from '../user/user.service';
+import { Auth } from '../auth/auth';
+import { AuthService } from '../auth/auth.service';
+import { AuthController } from '../auth/auth.controller';
 
 @Module({
   imports: [
@@ -18,13 +21,13 @@ import { UserService } from '../user/user.service';
       username: 'postgres',
       password: process.env.POSTGRES_PASSWORD,
       database: 'client_side',
-      entities: [Developer, Game, Rating, User],
+      entities: [Developer, Game, Rating, User, Auth],
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([Developer, Game, Rating, User]),
+    TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth]),
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController, UserController, AuthController],
+  providers: [AppService, UserService, AuthService],
 })
 export class AppModule {}

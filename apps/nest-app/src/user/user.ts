@@ -1,6 +1,6 @@
 import { UserEntity } from "shared-lib/src/lib/entities/user";
 import { Rating } from "../rating/rating";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User implements UserEntity {
@@ -15,4 +15,13 @@ export class User implements UserEntity {
     
     @OneToMany(() => Rating, rating => rating.user)
     ratings: Rating[];
+
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @DeleteDateColumn()
+    deleted: Date;
 }

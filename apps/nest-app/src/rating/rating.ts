@@ -1,4 +1,4 @@
-import { Column, Entity, Index, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Index, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { Game } from "../game/game";
 import { User } from "../user/user";
 import { RatingEntity } from "shared-lib/src/lib/entities/rating";
@@ -20,4 +20,13 @@ export class Rating implements RatingEntity {
 
     @Column({ type: 'double precision' })
     rating: number;
+
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @DeleteDateColumn()
+    deleted: Date;
 }

@@ -1,7 +1,7 @@
 import { GameEntity } from "shared-lib/src/lib/entities/game";
 import { Developer } from "../developer/developer";
 import { Rating } from "../rating/rating";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Game implements GameEntity {
@@ -22,4 +22,13 @@ export class Game implements GameEntity {
 
     @OneToMany(() => Rating, rating => rating.game)
     ratings: Rating[];
+
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @DeleteDateColumn()
+    deleted: Date;
 }

@@ -1,5 +1,5 @@
 import { DeveloperEntity } from "shared-lib/src/lib/entities/developer";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Game } from "../game/game";
 
 @Entity()
@@ -15,4 +15,13 @@ export class Developer implements DeveloperEntity {
 
     @OneToMany(() => Game, game => game.developer)
     games: Game[];
+
+    @CreateDateColumn()
+    created: Date;
+
+    @UpdateDateColumn()
+    updated: Date;
+
+    @DeleteDateColumn()
+    deleted: Date;
 }
