@@ -1,11 +1,11 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Auth } from "./auth";
 import { Repository } from "typeorm";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import bcrypt from 'bcrypt';
 import { AuthResponse, LoginRequest, RegisterRequest } from "@client-side/shared-lib";
 import { User } from "../user/user";
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -23,14 +23,14 @@ export class AuthService {
         const hash = this.hashPassword(password, salt);
         if (this.authRepository.existsBy({ email: email, password: hash })) {
             const user = await this.userRepository.findOne({ where: { email: email } });
-            return new AuthResponse(this.generateToken(email), user);
+            return new AuthResponse(this.generateToken(user.id), user);
         }
     }
 
     async register(authRequest: RegisterRequest): Promise<AuthResponse> {
         const { name, email, password } = authRequest;
         if (await this.authRepository.findOne({ where: { email: email } })) {
-            throw new Error('A user with this email already exists');
+            throw new BadRequestException('A user with this email already exists');
         }
         const salt = this.generateSalt();
         const hash = this.hashPassword(password, salt);
@@ -44,7 +44,7 @@ export class AuthService {
         user.email = email;
         user = this.userRepository.create(user);
         user = await this.userRepository.save(user);
-        return new AuthResponse(this.generateToken(email), user);
+        return new AuthResponse(this.generateToken(user.id), user);
 
     }
 
@@ -56,8 +56,25 @@ export class AuthService {
         return bcrypt.genSaltSync();
     }
         
-    private generateToken(email: string): string {
-        const payload = { email };
+    private generateToken(id: number): string {
+        const payload = { id };
         return sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+    }
+
+    public verifyAuthHeader(header: string): number {
+        if (!header) {
+            throw new BadRequestException('Authorization header is required');
+        }
+        if (!header.startsWith('Bearer ')) {
+            throw new BadRequestException('Invalid authorization header');
+        }
+        const token = header.split(' ')[1];
+        const payload = verify(token, process.env.JWT_SECRET);
+
+        if (typeof payload === 'string' || !payload.id) {
+            throw new BadRequestException('Invalid token payload');
+        }
+        
+        return parseInt(payload.id);
     }
 }

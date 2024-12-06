@@ -10,7 +10,7 @@ export class User implements UserEntity {
     @Column()
     name: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, update: false })
     email: string;
     
     @OneToMany(() => Rating, rating => rating.user)
