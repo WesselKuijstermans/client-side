@@ -19,6 +19,11 @@ import { RatingController } from '../rating/rating.controller';
 import { DeveloperService } from '../developer/developer.service';
 import { GameService } from '../game/game.service';
 import { RatingService } from '../rating/rating.service';
+import { Platform } from '../platform/platform';
+import { GamePlatform } from '../platform/gameplatform';
+import { PlatformController } from '../platform/platform.controller';
+import { PlatformService } from '../platform/platform.service';
+import { GamePlatformService } from '../platform/gameplatform.service';
 
 
 @Module({
@@ -30,18 +35,18 @@ import { RatingService } from '../rating/rating.service';
       username: process.env.DB_USERNAME || 'postgres',
       password: process.env.DB_PASSWORD || process.env.POSTGRES_PASSWORD,
       database: process.env.DB_NAME || 'client_side',
-      entities: [Developer, Game, Rating, User, Auth],
+      entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth]),
+    TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AppController, UserController, AuthController, DeveloperController, GameController, RatingController],
-  providers: [AppService, UserService, AuthService, DeveloperService, GameService, RatingService],
+  controllers: [AppController, UserController, AuthController, DeveloperController, GameController, RatingController, PlatformController],
+  providers: [AppService, UserService, AuthService, DeveloperService, GameService, RatingService, PlatformService, GamePlatformService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

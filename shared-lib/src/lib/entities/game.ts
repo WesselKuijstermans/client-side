@@ -1,4 +1,5 @@
 import { DeveloperEntity } from "./developer";
+import { GamePlatformEntity } from "./gameplatform";
 import { RatingEntity } from "./rating";
 
 export class GameEntity{
@@ -6,15 +7,15 @@ export class GameEntity{
     name: string;
     genre: string;
     developer: DeveloperEntity;
-    releaseDate: Date;
     ratings: RatingEntity[];
+    platforms: GamePlatformEntity[];
 
-    constructor(id: number, name: string, genre: string, developer: DeveloperEntity, releaseDate: Date){
+    constructor(id: number, name: string, genre: string, developer: DeveloperEntity, platforms: GamePlatformEntity[]){
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.developer = developer;
-        this.releaseDate = releaseDate;
         this.ratings = [];
+        this.platforms = platforms;
     }
 }

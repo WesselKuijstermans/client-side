@@ -20,7 +20,6 @@ export class Developer implements DeveloperEntity {
     @ManyToOne(() => User)
     createdBy: User;
 
-
     @CreateDateColumn()
     created: Date;
 

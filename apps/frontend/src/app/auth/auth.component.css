@@ -1,0 +1,49 @@
+div, ng-template {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+    }
+
+p a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+form * {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form button:disabled {
+    background-color: #b1b1b1;
+    cursor: not-allowed;
+}
+
+form button:disabled:hover {
+    background-color: #b1b1b1;
+}

@@ -1,0 +1,23 @@
+<div *ngIf="isLoginMode; else registerMode">
+  <h1>Login</h1>
+  <form (submit)="login($event)">
+    <input type="email" name="email" placeholder="Email" />
+    <input type="password" name="password" placeholder="Password" />
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Register</a></p>
+</div>
+
+<ng-template #registerMode>
+    <div>
+        <h1>Register</h1>
+        <form (submit)="register($event)">
+            <input type="email" name="email" placeholder="Email" />
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Login</a></p>
+    </div>
+</ng-template>
