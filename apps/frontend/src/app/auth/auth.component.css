@@ -1,4 +1,4 @@
-div, ng-template {
+div.form, ng-template div.form {
     margin: 0 auto;
     margin-top: 20px;
     width: 100%;
@@ -46,4 +46,12 @@ form button:disabled {
 
 form button:disabled:hover {
     background-color: #b1b1b1;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+small {
+  color: red;
 }

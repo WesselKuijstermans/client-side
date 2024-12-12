@@ -22,8 +22,18 @@ nav a:hover {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     width: 100%;
     padding: 0;
     margin: 0;
+}
+
+nav ul.pages {
+    margin-left: 40%;
+}
+
+nav ul.auth {
+    justify-content: flex-end;
+    margin-right: 2%;
+    width: auto;
 }

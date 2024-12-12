@@ -1,6 +1,6 @@
 import { PlatformEntity } from "shared-lib/src/lib/entities/platform";
 import { PlatformType } from "shared-lib/src/lib/entities/platformtype";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { GamePlatform } from "./gameplatform";
 import { User } from "../user/user";
 
@@ -18,7 +18,10 @@ export class Platform implements PlatformEntity {
     @OneToMany(() => GamePlatform, gamePlatform => gamePlatform.platform)
     games: GamePlatform[];
 
-    @OneToOne(() => User)
+    @Column({ nullable: true }) 
+    releaseDate: Date;
+
+    @ManyToOne(() => User, { eager: true })
     createdBy: User;
 
     @CreateDateColumn()

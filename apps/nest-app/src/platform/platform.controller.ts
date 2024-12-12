@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Req } from "@nestjs/co
 import { PlatformService } from "./platform.service";
 import { Platform } from "./platform";
 import { Request } from 'express';
+import { CreatePlatformDto } from "shared-lib/src/lib/entities/platform";
 
 @Controller('platform')
 export class PlatformController {
@@ -18,16 +19,16 @@ export class PlatformController {
     }
 
     @Post()
-    create(@Body('platform') platform: Platform) {
-        return this.platformService.create(platform);
+    create(@Body() platform: CreatePlatformDto, @Req() req: Request) {
+        return this.platformService.create(platform, req);
     }
 
-    @Put('update')
-    update(@Body('platform') platform: Platform, @Req() req: Request) {
+    @Put()
+    update(@Body() platform: Platform, @Req() req: Request) {
         return this.platformService.update(platform, req);
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     delete(@Param('id') id: number, @Req() req: Request) {
         return this.platformService.delete(id, req);
     }

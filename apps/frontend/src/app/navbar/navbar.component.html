@@ -1,11 +1,14 @@
 <nav>
-    <ul>
+    <ul class="pages">
         <a (click)="router.navigate([''])" (keydown.enter)="router.navigate([''])" class="nav-link" tabindex="0">Home</a>
         <a (click)="router.navigate(['/games'])" (keydown.enter)="router.navigate(['/games'])" class="nav-link" tabindex="0">Games</a>
         <a (click)="router.navigate(['/developers'])" (keydown.enter)="router.navigate(['/developers'])" class="nav-link" tabindex="0">Developers</a>
+        <a (click)="router.navigate(['/platforms'])" (keydown.enter)="router.navigate(['/platforms'])" class="nav-link" tabindex="0">Platforms</a>
     </ul>
 
-    <div style="padding-right: 30px;">
-        <a (click)="router.navigate(['/auth'])" (keydown.enter)="router.navigate(['/auth'])" class="nav-link" tabindex="0">Login</a>
-    </div>
+    <ul class="auth">
+        <li *ngIf="!authService.isLoggedIn()"><a (click)="router.navigate(['/auth'])" (keydown.enter)="router.navigate(['/auth'])" tabindex="0">Login</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a (click)="router.navigate(['/profile'])" (keydown.enter)="router.navigate(['/profile'])" tabindex="0">Profile</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a (click)="logout()" (keydown.enter)="logout()" tabindex="0">Logout</a></li>
+      </ul>
 </nav>

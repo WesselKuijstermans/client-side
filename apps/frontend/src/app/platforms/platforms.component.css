@@ -1,0 +1,72 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+  display: flex;
+  align-items: center; /* Vertically align items */
+  width: 100%;
+  padding: 10px;
+  margin: -2px 0 0; /* Negative top margin to overlap borders */
+  border: 2px solid #ccc;
+  position: relative;
+  z-index: 1;
+}
+
+ul li:first-child {
+  margin-top: 0 !important; /* Remove negative margin for the first item */
+  background-color: #d1d1d1 !important;
+}
+
+ul li:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+ul li:nth-child(odd) {
+  background-color: #e9e9e9;
+}
+
+span {
+  width: 30%;
+  display: inline-block;
+}
+
+span.delete {
+  margin-left: auto;
+  width: auto;
+  display: flex;
+  align-items: center; /* Vertically align items within the span */
+  width: auto;
+}
+
+span img {
+  margin-right: 1em !important;
+  cursor: pointer;
+}
+
+li form {
+    display: inline-block;
+    width: 100%;
+}
+
+li form input, li form select {
+    width: 27%;
+    margin-right: 2%;
+}
+
+a {
+    cursor: pointer;
+    color: green
+    
+}
+
+a:hover {
+    color: darkgreen;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.8em;
+}

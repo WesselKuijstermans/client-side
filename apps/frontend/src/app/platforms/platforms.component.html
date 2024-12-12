@@ -1,0 +1,62 @@
+<div class="main">
+  <ul>
+    <li>
+      <span>Name</span>
+      <span>Type</span>
+      <span>Release Date</span>
+      <span class="delete">Delete</span>
+    </li>
+    <li *ngFor="let platform of platforms">
+      <span>{{ platform.name }}</span>
+      <span>{{ platform.type }}</span>
+      <span>{{
+        platform.releaseDate
+          ? (platform.releaseDate | date : 'yyyy-MM-dd')
+          : 'N/A'
+      }}</span>
+      <span class="delete" *ngIf="loggedInUser?.id === platform.createdBy.id">
+        <img
+          (click)="confirmDelete(platform.id)"
+          (keydown.enter)="confirmDelete(platform.id)"
+          src="/delete-icon.svg"
+          alt="Delete"
+          style="width: 1em; height: 1em"
+          tabindex="0"
+        />
+        <div *ngIf="platformToDelete === platform.id" class="confirm-popup">
+          <p>Are you sure you want to delete this platform?</p>
+          <button (click)="deletePlatform(platform.id)">Yes</button>
+          <button (click)="cancelDelete()">No</button>
+        </div>
+      </span>
+    </li>
+    <li *ngIf="isAdding">
+      <form [formGroup]="platformForm">
+        <input type="text" placeholder="Name" formControlName="name" />
+        <select formControlName="type">
+          <option *ngFor="let type of platformTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+
+        <input
+          type="date"
+          placeholder="Release Date"
+          formControlName="releaseDate"
+        />
+        <button (click)="addPlatform()">Add</button>
+        <button (click)="isAdding = false; submitted = false">Cancel</button>
+      </form>
+    </li>
+    <p *ngIf="platformForm.invalid && this.submitted" class="error-text">Name and Type are required fields</p>
+  </ul>
+  <a
+    *ngIf="!isAdding"
+    cursor="pointer"
+    (click)="isAdding = true"
+    (keydown.enter)="isAdding = !isAdding"
+    tabindex="0"
+  >
+    + Add new platform
+  </a>
+</div>

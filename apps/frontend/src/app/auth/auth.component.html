@@ -1,23 +1,67 @@
-<div *ngIf="isLoginMode; else registerMode">
+<div class="form" *ngIf="isLoginMode; else registerMode">
   <h1>Login</h1>
-  <form (submit)="login($event)">
-    <input type="email" name="email" placeholder="Email" />
-    <input type="password" name="password" placeholder="Password" />
-    <button type="submit">Login</button>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" />
+      <div *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+        <small *ngIf="authForm.get('email')?.errors?.['required']">Email is required</small>
+        <small *ngIf="authForm.get('email')?.errors?.['email']">This is not a valid email address</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" />
+      <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+        <small *ngIf="authForm.get('password')?.errors?.['required']">Password is required</small>
+        <small *ngIf="authForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long</small>
+      </div>
+    </div>
+
+    <button type="submit">{{ isLoginMode ? 'Login' : 'Register' }}</button>
   </form>
   <p>Don't have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Register</a></p>
 </div>
 
 <ng-template #registerMode>
-    <div>
-        <h1>Register</h1>
-        <form (submit)="register($event)">
-            <input type="email" name="email" placeholder="Email" />
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" />
-            <button type="submit">Register</button>
-        </form>
-        <p>Already have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Login</a></p>
-    </div>
+  <div class="form">
+    <h1>Register</h1>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" type="email" />
+        <div *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+          <small *ngIf="authForm.get('email')?.errors?.['required']">Email is required</small>
+          <small *ngIf="authForm.get('email')?.errors?.['email']">This is not a valid email address</small>
+        </div>
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input id="password" formControlName="password" type="password" />
+        <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+          <small *ngIf="authForm.get('password')?.errors?.['required']">Password is required</small>
+          <small *ngIf="authForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long</small>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoginMode">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" />
+        <div *ngIf="authForm.get('confirmPassword')?.invalid && authForm.get('confirmPassword')?.touched">
+          <small *ngIf="authForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</small>
+        </div>
+
+        <label for="username">Username</label>
+        <input id="username" formControlName="username" type="text" />
+        <div *ngIf="authForm.get('username')?.invalid && authForm.get('username')?.touched">
+          <small *ngIf="authForm.get('username')?.errors?.['required']">Username is required</small>
+        </div>
+      </div>
+
+      <button type="submit">{{ isLoginMode ? 'Login' : 'Register' }}</button>
+    </form>
+    <p>Already have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Login</a></p>
+  </div>
 </ng-template>
