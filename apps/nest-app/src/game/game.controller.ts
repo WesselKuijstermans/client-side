@@ -22,13 +22,18 @@ export class GameController {
         return this.gameService.findByName(name);
     }
 
+    @Get('highest-rated')
+    getHighestRated() {
+        return this.gameService.findHighestRated();
+    }
+
     @Post()
-    create(@Body('game') game: Game) {
+    create(@Body() game: Game) {
         return this.gameService.create(game);
     }
 
     @Put('update')
-    update(@Body('game') game: Game, @Req() req: Request) {
+    update(@Body() game: Game, @Req() req: Request) {
         return this.gameService.update(game, req);
     }
 

@@ -1,0 +1,100 @@
+<div class="main">
+  <div class="row">
+    <h1>{{ game?.name }}</h1>
+    <button
+      class="edit"
+      *ngIf="isCreator"
+      (click)="router.navigate(['/games/form/' + game?.id])"
+    >
+      Edit
+    </button>
+    <button class="delete" *ngIf="isCreator" (click)="delete()">Delete</button>
+  </div>
+  <div *ngIf="isDeleting" class="confirm-popup">
+    <p>Are you sure you want to delete this game?</p>
+    <button class="delete" (click)="confirmDelete()">Yes, delete</button>
+    <button class="edit" (click)="cancelDelete()">No, don't delete</button>
+  </div>
+  <div>
+    <p>Genre: {{ game?.genre }}</p>
+    <p>
+      Developer:
+      <a
+        tabindex="0"
+        (click)="router.navigate(['developers/', game?.developer?.id])"
+        (keyup.enter)="router.navigate(['developers/', game?.developer?.id])"
+        (keydown.space)="router.navigate(['developers/', game?.developer?.id])"
+        class="link-button"
+        >{{ game?.developer?.name }}</a
+      >
+    </p>
+    <p>Release Date: {{ game?.releaseDate | date : 'd MMMM yyyy' }}</p>
+
+    <p *ngIf="game?.ratings?.length; else noRatings">
+      Rating: {{ getAverageRating() }} over {{ game?.ratings?.length }} votes
+    </p>
+    <ng-template #noRatings>
+      <p>This game has no ratings</p>
+    </ng-template>
+    <p>Platforms:</p>
+    <p *ngFor="let platform of game?.platforms">
+      Released for {{ platform?.platform?.name }} on
+      {{ platform?.releaseDate | date : 'd MMMM yyyy' }}
+    </p>
+    <button
+      class="edit"
+      (click)="router.navigate(['games/platform-form', game?.id])"
+    >
+      Edit platforms
+    </button>
+  </div>
+
+  <div class="row">
+    <h1>Reviews</h1>
+    <button
+      class="add"
+      *ngIf="authService.isLoggedIn()"
+      (click)="isReviewing = true"
+    >
+      Add Review
+    </button>
+  </div>
+  <div *ngIf="isReviewing" class="rating-form">
+    <form (ngSubmit)="submitReview()">
+      <div>
+        <label for="rating">Rating:</label>
+        <input
+          type="range"
+          id="rating"
+          name="rating"
+          min="1"
+          max="10"
+          step="0.1"
+          [(ngModel)]="newRating.rating"
+          required
+        />
+        <span>{{ newRating.rating }}</span>
+      </div>
+      <div>
+        <label for="comment">Comment:</label>
+        <textarea
+          id="comment"
+          name="comment"
+          [(ngModel)]="newRating.review"
+          required
+        ></textarea>
+      </div>
+      <button class="add" type="submit">Submit Review</button>
+    </form>
+  </div>
+  <div *ngIf="game?.ratings?.length; else noReviews">
+    <div *ngFor="let rating of game?.ratings" class="rating">
+      <p><strong>{{ rating.user.name }}</strong>{{ rating.created | date : 'd MMMM yyyy' }}</p>
+      <p>Rating: {{ rating.rating }}</p>
+      <p>{{ rating.review }}</p>
+    </div>
+  </div>
+  <ng-template #noReviews>
+    <p>No ratings yet.</p>
+  </ng-template>
+</div>

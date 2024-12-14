@@ -1,1 +1,22 @@
-<p>developers works!</p>
+<div class="main">
+  <div class="add" *ngIf="isLoggedIn">
+    <button (click)="router.navigate(['/developers/form/0'])">
+      Add Developer
+    </button>
+  </div>
+  <ul>
+    <li>
+      <span>Name</span>
+      <span>E-mail</span>
+    </li>
+    <li
+      *ngFor="let dev of developers"
+      (click)="router.navigate(['developers/' + dev.id])"
+      (keydown.enter)="router.navigate(['developers/' + dev.id])"
+      tabindex="0"
+    >
+      <span>{{ dev.name }}</span>
+      <span>{{ dev.email }}</span>
+    </li>
+  </ul>
+</div>

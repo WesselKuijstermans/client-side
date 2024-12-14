@@ -15,16 +15,16 @@ export class Game implements GameEntity {
     @Column()
     genre: string;
 
-    @ManyToOne(() => Developer, developer => developer.games)
+    @ManyToOne(() => Developer, developer => developer.games, { eager: true })
     developer: Developer;
 
     @Column({ type: 'date' })
     releaseDate: Date;
 
-    @OneToMany(() => Rating, rating => rating.game)
+    @OneToMany(() => Rating, rating => rating.game, { eager: true })
     ratings: Rating[];
 
-    @OneToMany(() => GamePlatform, gamePlatform => gamePlatform.game)
+    @OneToMany(() => GamePlatform, gamePlatform => gamePlatform.game, { eager: true , cascade: true })
     platforms: GamePlatform[];
 
     @CreateDateColumn()

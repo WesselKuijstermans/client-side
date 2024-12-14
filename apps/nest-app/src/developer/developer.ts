@@ -17,7 +17,7 @@ export class Developer implements DeveloperEntity {
     @OneToMany(() => Game, game => game.developer)
     games: Game[];
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { eager: true })
     createdBy: User;
 
     @CreateDateColumn()

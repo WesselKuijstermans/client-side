@@ -70,3 +70,7 @@ a:hover {
     color: red;
     font-size: 0.8em;
 }
+
+button {
+  margin-left: 5px;
+}

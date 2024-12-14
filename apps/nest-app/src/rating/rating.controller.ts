@@ -18,7 +18,8 @@ export class RatingController {
     }
 
     @Post()
-    create(@Body('rating') rating: Rating, @Req() req: Request) {
+    create(@Body() rating: Rating, @Req() req: Request) {
+        console.log("Rating: " + rating);
         return this.ratingService.create(rating, req);
     }
 

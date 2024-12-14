@@ -1,0 +1,35 @@
+<div class="main">
+  <div class="platform-selector">
+    <select #platformSelect (change)="addGamePlatform(platformSelect.value)">
+      <option *ngFor="let platform of platforms" [value]="platform.id">
+        {{ platform.name }}
+      </option>
+    </select>
+  </div>
+  <ul class="cards">
+    <li *ngFor="let gamePlatform of gamePlatforms; let i = index">
+      <form #form="ngForm" (ngSubmit)="save(form.value, gamePlatform)">
+        <div class="game-card">
+          <p style="font-weight: bold">{{ gamePlatform.platform?.name }}</p>
+          <p>
+            Release Date: {{ gamePlatform.releaseDate | date : 'd MMMM yyyy' }}
+          </p>
+          <input
+            type="date"
+            name="releaseDate"
+            [(ngModel)]="gamePlatform.releaseDate"
+            required
+          />
+          <div class="buttons">
+            <button class="edit" type="submit" [disabled]="form.invalid">
+              Save
+            </button>
+            <button class="delete" type="button" (click)="delete(gamePlatform)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </li>
+  </ul>
+</div>

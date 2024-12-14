@@ -7,6 +7,7 @@ div.row {
 div.row > *:first-child {
   margin-right: auto;
 }
+
 button {
   padding: 5px 10px;
   border: none;
@@ -24,7 +25,23 @@ button.add:hover {
   background-color: #45a049;
 }
 
-ul.cards {
+button.edit {
+  background-color: #008cba;
+}
+
+button.edit:hover {
+  background-color: #007a9b;
+}
+
+button.delete {
+  background-color: #f44336;
+}
+
+button.delete:hover {
+  background-color: #da190b;
+}
+
+ul {
   list-style: none;
   display: flex;
   justify-items: space-between;
@@ -32,6 +49,7 @@ ul.cards {
   width: 100%;
   padding: 10px;
   margin: -2px 0 0;
+  border: 2px solid #ccc;
   position: relative;
   z-index: 1;
 }
@@ -48,60 +66,8 @@ ul.cards {
   border-radius: 5px;
   background-color: #f9f9f9;
   width: 200px;
-  height: 200px;
 }
 
 .game-card p {
   text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-table th, table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-table th {
-    background-color: #f2f2f2;
-}
-
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.link {
-  cursor: pointer;
-}
-
-.search-filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-filter input[type="text"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: medium;
-    width: 15rem;
-}
-
-.search-filter select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: medium;
-    margin-left: 10px;
 }

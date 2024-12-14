@@ -1,0 +1,27 @@
+<div class="main">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Developer Name</label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text"
+        placeholder="{{ developerToEdit?.name || 'Name' }}"
+      />
+      <small *ngIf="noName">Name is required</small>
+    </div>
+    <div>
+      <label for="email">Developer Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        type="email"
+        placeholder="{{ developerToEdit?.email || 'Email' }}"
+      />
+      <small *ngIf="noEmail">Email is required</small>
+    </div>
+    <button class="edit" *ngIf="devId !== null && devId > 0">Edit</button>
+    <button class="add" *ngIf="devId === null || devId === 0">Add</button>
+    <button class="cancel" (click)="goBack(devId)">Cancel</button>
+  </form>
+</div>

@@ -1,1 +1,60 @@
-<p>games works!</p>
+<div class="main">
+  <div class="row">
+    <h1>Highest Rated Games</h1>
+    <button
+      [disabled]="!isLoggedIn"
+      class="add"
+      (click)="router.navigate(['/games/form/0'])"
+    >
+      Add Game
+    </button>
+  </div>
+  <ul class="cards">
+    <li *ngFor="let game of highestRatedGames">
+      <div
+        class="game-card"
+        tabindex="0"
+        (click)="router.navigate(['/games/' + game.id])"
+        (keydown.enter)="router.navigate(['/games/' + game.id])"
+      >
+        <p style="font-weight: bold">{{ game.name }}</p>
+        <p>Genre: {{ game.genre }}</p>
+        <p>Platforms: {{ getPlatformNames(game) }}</p>
+      </div>
+    </li>
+  </ul>
+  <h1>All Games</h1>
+  <div class="search-filter">
+    <input
+      type="text"
+      placeholder="Search by game or developer"
+      [(ngModel)]="searchTerm"
+    />
+    <select [(ngModel)]="selectedGenre">
+      <option value="">All Genres</option>
+      <option *ngFor="let genre of genres">{{ genre }}</option>
+    </select>
+    <select [(ngModel)]="selectedPlatform">
+      <option value="">All Platforms</option>
+      <option *ngFor="let platform of platforms">{{ platform }}</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Developer</th>
+        <th>Genre</th>
+        <th>Platforms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of filterGames()">
+        <td class="link" (click)="router.navigate(['games/', game.id])">{{ game.name }}</td>
+        <td class="link" (click)="router.navigate(['developers/', game.developer.id])">{{ game.developer.name }}</td>
+        <td>{{ game.genre }}</td>
+        <td>{{ getPlatformNames(game) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

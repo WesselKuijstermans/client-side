@@ -16,7 +16,7 @@ export class GamePlatform {
     @ManyToOne(() => Game, game => game.ratings)
     game: Game;
 
-    @ManyToOne(() => Platform, platform => platform.games)
+    @ManyToOne(() => Platform, platform => platform.games, { eager: true })
     platform: Platform;
     
 }

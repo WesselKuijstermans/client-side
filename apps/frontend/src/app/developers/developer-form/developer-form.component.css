@@ -1,0 +1,54 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+form input[type='text'],
+form input[type='email'],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+form button {
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button.add {
+  background-color: #4caf50;
+}
+
+form button.add:hover {
+  background-color: #45a049;
+}
+
+form button.edit {
+  background-color: #008cba;
+}
+
+form button.edit:hover {
+  background-color: #007a9b;
+}
+
+form button.cancel {
+  background-color: #f44336;
+}
+
+form button.cancel:hover {
+  background-color: #da190b;
+}

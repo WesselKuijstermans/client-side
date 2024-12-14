@@ -22,17 +22,23 @@ export class DeveloperController {
         return this.developerService.findByName(name);
     }
 
-    @Post()
-    create(@Body('developer') developer: Developer) {
-        return this.developerService.create(developer);
+    @Get('user')
+    getByUserId(@Req() req: Request) {
+        return this.developerService.findByUserId(req);
     }
 
-    @Put('update')
+    @Post()
+    create(@Body() developer: Developer, @Req() req: Request) {
+        return this.developerService.create(developer, req);
+    }
+
+    @Put()
     update(@Body('developer') developer: Developer, @Req() req: Request) {
+        console.log(developer);
         return this.developerService.update(developer, req);
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     delete(@Param('id') id: number, @Req() req: Request) {
         return this.developerService.delete(id, req);
     }

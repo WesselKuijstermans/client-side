@@ -1,0 +1,29 @@
+<div class="main">
+  <form [formGroup]="gameForm" (ngSubmit)="submitForm()">
+    <div>
+      <label for="name">Game Title:</label>
+      <input type="text" id="name" formControlName="name"  required />
+    </div>
+    <div>
+      <label for="genre">Select Genre:</label>
+      <select id="genre" formControlName="genre" required>
+        <option value="">--Please choose an option--</option>
+        <option *ngFor="let genre of genres">{{ genre }}</option>
+      </select>
+    </div>
+    <div *ngIf="!gameToEdit">
+      <label for="developer">Select Developer:</label>
+      <select id="developer" formControlName="developer" required>
+        <option value="">--Please choose an option--</option>
+        <option *ngFor="let developer of developers">
+          {{ developer.name }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="releaseDate">Release Date:</label>
+      <input type="date" id="releaseDate" formControlName="releaseDate" required />
+    </div>
+    <button type="submit">{{ gameToEdit ? 'Edit Game' : 'Create Game' }}</button>
+  </form>
+</div>

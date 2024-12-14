@@ -24,6 +24,7 @@ import { GamePlatform } from '../platform/gameplatform';
 import { PlatformController } from '../platform/platform.controller';
 import { PlatformService } from '../platform/platform.service';
 import { GamePlatformService } from '../platform/gameplatform.service';
+import { GamePlatformController } from '../platform/gameplatform.controller';
 
 
 @Module({
@@ -37,7 +38,6 @@ import { GamePlatformService } from '../platform/gameplatform.service';
       database: process.env.DB_NAME || 'client_side',
       entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
       synchronize: true,
-      logging: true,
     }),
     TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
     JwtModule.register({
@@ -45,7 +45,7 @@ import { GamePlatformService } from '../platform/gameplatform.service';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AppController, UserController, AuthController, DeveloperController, GameController, RatingController, PlatformController],
+  controllers: [AppController, UserController, AuthController, DeveloperController, GameController, RatingController, PlatformController, GamePlatformController],
   providers: [AppService, UserService, AuthService, DeveloperService, GameService, RatingService, PlatformService, GamePlatformService],
 })
 export class AppModule implements NestModule {
