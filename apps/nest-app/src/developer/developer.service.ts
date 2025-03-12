@@ -19,17 +19,17 @@ export class DeveloperService {
     return this.developerRepository.find();
   }
 
-async findById(id: number): Promise<Developer> {
+  async findById(id: number): Promise<Developer> {
     return this.developerRepository.findOne({
-        where: { id },
-        relations: ['games', 'games.platforms', 'games.platforms.platform'],
+      where: { id },
+      relations: ['games', 'games.platforms', 'games.platforms.platform'],
     });
-}
+  }
 
   async findByName(name: string): Promise<Developer> {
     return this.developerRepository.findOne({
-        where: { name },
-        relations: ['games', 'games.platforms', 'games.platforms.platform'],
+      where: { name },
+      relations: ['games', 'games.platforms', 'games.platforms.platform'],
     });
   }
 
@@ -37,10 +37,11 @@ async findById(id: number): Promise<Developer> {
     const userId = this.authService.verifyAuthHeader(
       req.headers['authorization']
     );
-    return this.developerRepository.find({
-        where: { createdBy: { id: userId } },
-        relations: ['games', 'games.platforms', 'games.platforms.platform'],
-    });
+    return this.developerRepository
+      .createQueryBuilder('developer')
+      .leftJoinAndSelect('developer.games', 'games')
+      .where('developer.createdBy.id = :userId', { userId })
+      .getMany();
   }
 
   async create(developer: Developer, req: Request): Promise<Developer> {

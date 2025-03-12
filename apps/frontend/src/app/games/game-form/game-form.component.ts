@@ -31,7 +31,6 @@ export class GameFormComponent implements OnInit {
       name: ['', Validators.required],
       genre: ['', Validators.required],
       developer: [null, Validators.required],
-      releaseDate: ['', Validators.required],
     });
 
     fetch(`${this.baseUrl}/developer/user`, {
@@ -56,7 +55,6 @@ export class GameFormComponent implements OnInit {
             name: data.name,
             genre: data.genre,
             developer: data.developer.name,
-            releaseDate: data.releaseDate,
           });
         });
     }

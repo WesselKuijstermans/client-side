@@ -7,7 +7,6 @@ export class GameEntity {
   name: string;
   genre: string;
   developer: DeveloperEntity;
-  releaseDate: Date;
   ratings: RatingEntity[];
   platforms: GamePlatformEntity[];
 
@@ -16,14 +15,12 @@ export class GameEntity {
     name: string,
     genre: string,
     developer: DeveloperEntity,
-    releaseDate: Date,
     platforms: GamePlatformEntity[]
   ) {
     this.id = id;
     this.name = name;
     this.genre = genre;
     this.developer = developer;
-    this.releaseDate = releaseDate;
     this.ratings = [];
     this.platforms = platforms;
   }

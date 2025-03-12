@@ -1,0 +1,49 @@
+div.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+div.tabs a {
+    width: 100%;
+    cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-right: 0;
+    border-right: none;
+}
+
+div.tabs a:last-child {
+    border-right: 1px solid #ccc;
+}
+
+div.tabs a.active {
+    background-color: #e2e2e2;
+}
+
+div.tab-content {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    white-space: nowrap;
+    padding: 4px;
+  }
+
+table th:nth-child(3), table td:nth-child(3) {
+    text-align: right;
+}
+
+table tr:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}

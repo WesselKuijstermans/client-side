@@ -22,6 +22,11 @@ export class GameController {
         return this.gameService.findByName(name);
     }
 
+    @Get('user')
+    getByUser(@Req() req: Request) {
+        return this.gameService.findByUser(req);
+    }
+
     @Get('highest-rated')
     getHighestRated() {
         return this.gameService.findHighestRated();

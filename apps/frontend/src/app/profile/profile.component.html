@@ -1,1 +1,57 @@
-<p>profile works!</p>
+<div class="main">
+  <h1>{{ this.loggedInUser?.name }}</h1>
+
+  <h2>{{ this.loggedInUser?.name }}'s Contributions</h2>
+  <div class="tabs">
+    <a
+      (click)="changeTab('games')"
+      (keyup.enter)="changeTab('games')"
+      [class.active]="activeTab === 'games'"
+      tabindex="0"
+      >Games
+    </a>
+    <a
+      (click)="changeTab('developers')"
+      (keyup.enter)="changeTab('developers')"
+      [class.active]="activeTab === 'developers'"
+      tabindex="0"
+      >Developers
+    </a>
+    <a
+      (click)="changeTab('reviews')"
+      (keyup.enter)="changeTab('reviews')"
+      [class.active]="activeTab === 'reviews'"
+      tabindex="0"
+      >Reviews
+    </a>
+  </div>
+
+  <div class="tab-content">
+    <table>
+      <tbody>
+        <ng-container *ngIf="activeTab === 'games'">
+          <tr *ngFor="let game of games">
+            <td>{{game.name}}</td>
+            <td>{{game.developer.name}}</td>
+            <td>{{game.genre}}</td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="activeTab === 'developers'">
+          <tr *ngFor="let dev of developers">
+            <td>{{dev.name}}</td>
+            <td>{{dev.email}}</td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="activeTab === 'reviews'">
+          <tr *ngFor="let review of reviews">
+            <td class="col-fit">{{review.game.name}}</td>
+            <td>{{review.review}}</td>
+            <td class="col-fit">{{review.rating}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

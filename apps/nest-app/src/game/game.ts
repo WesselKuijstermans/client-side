@@ -18,9 +18,6 @@ export class Game implements GameEntity {
     @ManyToOne(() => Developer, developer => developer.games, { eager: true })
     developer: Developer;
 
-    @Column({ type: 'date' })
-    releaseDate: Date;
-
     @OneToMany(() => Rating, rating => rating.game, { eager: true })
     ratings: Rating[];
 

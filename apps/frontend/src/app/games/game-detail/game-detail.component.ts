@@ -76,10 +76,8 @@ export class GameDetailComponent implements OnInit {
 
   getAverageRating(): number {
     if (this.game?.ratings.length) {
-      return (
-        this.game.ratings.reduce((acc, review) => acc + review.rating, 0) /
-        this.game.ratings.length
-      );
+      const average = this.game.ratings.reduce((acc, review) => acc + review.rating, 0) / this.game.ratings.length;
+      return parseFloat(average.toFixed(2));
     }
     return 0;
   }
@@ -101,7 +99,16 @@ export class GameDetailComponent implements OnInit {
       body: JSON.stringify({ ...this.newRating, game: this.game }),
     }).then(() => {
       this.isReviewing = false;
+      if (this.hasReviewed() && this.game && this.game.ratings) {
+        this.game.ratings = this.game.ratings.filter(
+          (rating) => rating.user.id !== this.loggedInUser?.id
+        );
+      }
       this.game?.ratings.push(this.newRating);
     });
+  }
+
+  hasReviewed(): boolean {
+    return this.game?.ratings.some( rating => rating.user.id === this.loggedInUser?.id) ?? false;
   }
 }

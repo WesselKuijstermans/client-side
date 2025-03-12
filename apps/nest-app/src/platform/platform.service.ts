@@ -24,6 +24,15 @@ export class PlatformService {
     return this.platformRepository.findOneBy({ id });
   }
 
+  async findByUser(req: Request): Promise<Platform[]> {
+    const userId = this.authService.verifyAuthHeader(
+      req.headers['authorization']
+    );
+    return this.platformRepository.find({
+      where: { createdBy: { id: userId } },
+    });
+  }
+
   async create(platform: CreatePlatformDto, req: Request): Promise<Platform> {
     const reqId = this.authService.verifyAuthHeader(
       req.headers['authorization']
@@ -31,7 +40,7 @@ export class PlatformService {
     const user = await this.userService.findById(reqId);
     return this.platformRepository.save({
       ...platform,
-      createdBy: user
+      createdBy: user,
     });
   }
 

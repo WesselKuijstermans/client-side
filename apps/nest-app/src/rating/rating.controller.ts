@@ -12,9 +12,9 @@ export class RatingController {
         return this.ratingService.findAllByGame(id);
     }
 
-    @Get('user/:id')
-    getByName(@Param('id') id: number) {
-        return this.ratingService.findAllByUser(id);
+    @Get('user')
+    getByUser(@Req () req: Request) {
+        return this.ratingService.findAllByUser(req);
     }
 
     @Post()

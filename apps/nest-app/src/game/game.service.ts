@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Game } from './game';
 import { Repository } from 'typeorm';
@@ -36,38 +41,51 @@ export class GameService {
     return this.gameRepository.findOneBy({ name });
   }
 
-async findHighestRated(): Promise<Game[]> {
+  async findByUser(req: Request): Promise<Game[]> {
+    const reqId = this.authService.verifyAuthHeader(
+      req.headers['authorization']
+    );
+    return this.gameRepository.find({
+      where: { developer: { createdBy: { id: reqId } } },
+      relations: ['developer', 'developer.createdBy'],
+    });
+  }
+
+  async findHighestRated(): Promise<Game[]> {
     return this.gameRepository
-        .createQueryBuilder('game')
-        .leftJoinAndSelect('game.platforms', 'platforms')
-        .leftJoinAndSelect('platforms.platform', 'platform')
-        .leftJoin('game.ratings', 'rating')
-        .addSelect('game.*')
-        .addSelect('AVG(rating.rating)', 'avgrating')
-        .groupBy('game.id, platforms.gameId, platforms.platformId, platform.id')
-        .orderBy('avgrating', 'DESC')
-        .take(5)
-        .getMany();
-}
+      .createQueryBuilder('game')
+      .leftJoinAndSelect('game.platforms', 'platforms')
+      .leftJoinAndSelect('platforms.platform', 'platform')
+      .leftJoin('game.ratings', 'rating')
+      .addSelect('game.*')
+      .addSelect('AVG(rating.rating)', 'avgrating')
+      .groupBy('game.id, platforms.gameId, platforms.platformId, platform.id')
+      .orderBy('avgrating', 'DESC')
+      .take(5)
+      .getMany();
+  }
 
   async create(game: Game): Promise<Game> {
     game.developer = await this.developerService.findById(game.developer.id);
     return this.gameRepository.save(game);
   }
 
-  async createGameWithPlatforms(game: Game, gamePlatforms: GamePlatform[]): Promise<Game> {
+  async createGameWithPlatforms(
+    game: Game,
+    gamePlatforms: GamePlatform[]
+  ): Promise<Game> {
     const savedGame = await this.gameRepository.save(game);
 
-    gamePlatforms.forEach(platform => {
-        platform.gameId = savedGame.id;
+    gamePlatforms.forEach((platform) => {
+      platform.gameId = savedGame.id;
     });
 
-    gamePlatforms.forEach(async gamePlatform => {
-        await this.gamePlatformService.create(gamePlatform);
+    gamePlatforms.forEach(async (gamePlatform) => {
+      await this.gamePlatformService.create(gamePlatform);
     });
 
     return savedGame;
-}
+  }
 
   async update(game: Game, req: Request): Promise<Game> {
     const reqId = this.authService.verifyAuthHeader(

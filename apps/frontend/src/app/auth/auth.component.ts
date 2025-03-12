@@ -60,18 +60,25 @@ export class AuthComponent {
     fetch(`${this.baseUrl}/auth/login`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email, password })
     })
-      .then(response => response.json())
+      .then(response => {
+      if (!response.ok) {
+        this.authForm.reset();
+        this.authForm.setErrors({ loginFailed: true });
+        throw new Error('Login failed');
+      }
+      return response.json();
+      })
       .then(data => {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        this.router.navigate(['/']); // Redirect to home page
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      this.router.navigate(['/']); // Redirect to home page
       })
       .catch(error => {
-        console.error('Error:', error);
+      console.error('Error:', error);
       });
   }
 

@@ -20,6 +20,7 @@
     </div>
 
     <button type="submit">{{ isLoginMode ? 'Login' : 'Register' }}</button>
+    <small *ngIf="authForm.errors?.['loginFailed']">Invalid email or password</small>
   </form>
   <p>Don't have an account? <a (click)="toggleMode()" (keyup.enter)="toggleMode()" tabindex="0">Register</a></p>
 </div>

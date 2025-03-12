@@ -38,6 +38,7 @@ import { GamePlatformController } from '../platform/gameplatform.controller';
       database: process.env.DB_NAME || 'client_side',
       entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
       synchronize: true,
+      logging: true,
     }),
     TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
     JwtModule.register({

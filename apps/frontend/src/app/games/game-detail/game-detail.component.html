@@ -28,15 +28,14 @@
         >{{ game?.developer?.name }}</a
       >
     </p>
-    <p>Release Date: {{ game?.releaseDate | date : 'd MMMM yyyy' }}</p>
 
     <p *ngIf="game?.ratings?.length; else noRatings">
-      Rating: {{ getAverageRating() }} over {{ game?.ratings?.length }} votes
+      Rating: {{ getAverageRating() }}/10 over {{ game?.ratings?.length }} votes
     </p>
     <ng-template #noRatings>
       <p>This game has no ratings</p>
     </ng-template>
-    <p>Platforms:</p>
+    <h3>Platforms</h3>
     <p *ngFor="let platform of game?.platforms">
       Released for {{ platform?.platform?.name }} on
       {{ platform?.releaseDate | date : 'd MMMM yyyy' }}
@@ -53,10 +52,17 @@
     <h1>Reviews</h1>
     <button
       class="add"
-      *ngIf="authService.isLoggedIn()"
+      *ngIf="authService.isLoggedIn() && !hasReviewed"
       (click)="isReviewing = true"
     >
       Add Review
+    </button>
+    <button
+      class="edit"
+      *ngIf="authService.isLoggedIn() && hasReviewed"
+      (click)="isReviewing = true"
+    >
+      Edit Review
     </button>
   </div>
   <div *ngIf="isReviewing" class="rating-form">
@@ -89,7 +95,10 @@
   </div>
   <div *ngIf="game?.ratings?.length; else noReviews">
     <div *ngFor="let rating of game?.ratings" class="rating">
-      <p><strong>{{ rating.user.name }}</strong>{{ rating.created | date : 'd MMMM yyyy' }}</p>
+      <p>
+        <strong>{{ rating.user.name }}</strong
+        >{{ rating.created | date : 'd MMMM yyyy' }}
+      </p>
       <p>Rating: {{ rating.rating }}</p>
       <p>{{ rating.review }}</p>
     </div>

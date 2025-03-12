@@ -18,6 +18,11 @@ export class PlatformController {
         return this.platformService.findById(id);
     }
 
+    @Get('user')
+    getByUser(@Req() req: Request) {
+        return this.platformService.findByUser(req);
+    }
+
     @Post()
     create(@Body() platform: CreatePlatformDto, @Req() req: Request) {
         return this.platformService.create(platform, req);
