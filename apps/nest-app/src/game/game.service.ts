@@ -60,6 +60,7 @@ export class GameService {
       .addSelect('game.*')
       .addSelect('AVG(rating.rating)', 'avgrating')
       .groupBy('game.id, platforms.gameId, platforms.platformId, platform.id')
+      .having('COUNT(rating.review) > 0')
       .orderBy('avgrating', 'DESC')
       .take(5)
       .getMany();

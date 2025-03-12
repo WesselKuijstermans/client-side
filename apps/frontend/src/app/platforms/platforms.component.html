@@ -25,8 +25,8 @@
         />
         <div *ngIf="platformToDelete === platform.id" class="confirm-popup">
           <p>Are you sure you want to delete this platform?</p>
-          <button (click)="deletePlatform(platform.id)">Yes</button>
-          <button (click)="cancelDelete()">No</button>
+          <button class="delete" (click)="deletePlatform(platform.id)">Yes</button>
+          <button class="cancel" (click)="cancelDelete()">No</button>
         </div>
       </span>
     </li>
@@ -44,8 +44,8 @@
           placeholder="Release Date"
           formControlName="releaseDate"
         />
-        <button (click)="addPlatform()">Add</button>
-        <button (click)="isAdding = false; submitted = false">Cancel</button>
+        <button class="add" (click)="addPlatform()">Add</button>
+        <button class="cancel" (click)="isAdding = false; submitted = false">Cancel</button>
       </form>
     </li>
     <p *ngIf="platformForm.invalid && this.submitted" class="error-text">Name and Type are required fields</p>

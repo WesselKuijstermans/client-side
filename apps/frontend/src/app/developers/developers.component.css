@@ -12,7 +12,7 @@ ul li {
   padding: 10px;
   padding-right: 0;
   margin: -2px 0 0; /* Negative top margin to overlap borders */
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   position: relative;
   z-index: 1;
 }

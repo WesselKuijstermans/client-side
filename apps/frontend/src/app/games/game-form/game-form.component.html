@@ -2,7 +2,14 @@
   <form [formGroup]="gameForm" (ngSubmit)="submitForm()">
     <div>
       <label for="name">Game Title:</label>
-      <input type="text" id="name" formControlName="name"  required />
+      <input type="text" id="name" formControlName="name" required />
+      <div
+        *ngIf="gameForm.get('name')?.invalid && gameForm.get('name')?.touched"
+      >
+        <small *ngIf="gameForm.get('name')?.errors?.['required'] "
+          >Game Title is required</small
+        >
+      </div>
     </div>
     <div>
       <label for="genre">Select Genre:</label>
@@ -10,6 +17,13 @@
         <option value="">--Please choose an option--</option>
         <option *ngFor="let genre of genres">{{ genre }}</option>
       </select>
+      <div
+        *ngIf="gameForm.get('genre')?.invalid && gameForm.get('genre')?.touched"
+      >
+        <small *ngIf="gameForm.get('genre')?.errors?.['required'] "
+          >Genre is required</small
+        >
+      </div>
     </div>
     <div *ngIf="!gameToEdit">
       <label for="developer">Select Developer:</label>
@@ -19,7 +33,16 @@
           {{ developer.name }}
         </option>
       </select>
+      <div
+        *ngIf="gameForm.get('developer')?.invalid && gameForm.get('developer')?.touched"
+      >
+        <small *ngIf="gameForm.get('developer')?.errors?.['required'] "
+          >Developer is required</small
+        >
+      </div>
     </div>
-    <button type="submit">{{ gameToEdit ? 'Edit Game' : 'Create Game' }}</button>
+    <button class="add" type="submit">
+      {{ gameToEdit ? 'Edit Game' : 'Create Game' }}
+    </button>
   </form>
 </div>

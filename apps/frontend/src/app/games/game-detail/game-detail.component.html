@@ -30,7 +30,7 @@
     </p>
 
     <p *ngIf="game?.ratings?.length; else noRatings">
-      Rating: {{ getAverageRating() }}/10 over {{ game?.ratings?.length }} votes
+      Rating: {{ getAverageRating() }}/10 over {{ game?.ratings?.length }} reviews
     </p>
     <ng-template #noRatings>
       <p>This game has no ratings</p>
@@ -52,14 +52,14 @@
     <h1>Reviews</h1>
     <button
       class="add"
-      *ngIf="authService.isLoggedIn() && !hasReviewed"
+      *ngIf="authService.isLoggedIn() && !hasReviewed()"
       (click)="isReviewing = true"
     >
       Add Review
     </button>
     <button
       class="edit"
-      *ngIf="authService.isLoggedIn() && hasReviewed"
+      *ngIf="authService.isLoggedIn() && hasReviewed()"
       (click)="isReviewing = true"
     >
       Edit Review

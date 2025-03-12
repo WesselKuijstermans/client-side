@@ -1,0 +1,220 @@
+<div class="main">
+  <h1>Wessel Kuijstermans - 2166881</h1>
+  <h2>GameHub</h2>
+
+  <p>
+    GameHub is een website waar game-enthousiastelingen informatie kunnen vinden
+    over verschillende games, developers en platforms. Gebruikers kunnen zich
+    registreren en inloggen om bij te dragen aan de community door
+    developers, platforms en games toe te voegen. Daarnaast kunnen gebruikers
+    reviews schrijven over games en hun eigen bijdragen bekijken op hun
+    profielpagina.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Eis</th>
+        <th>Criteria</th>
+        <th>Prioriteit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>F01</td>
+        <td class="long">
+          Als developer wil ik dat gebruikers in kunnen loggen, zodat voor
+          Create, Update en Delete functionaliteiten authenticatie vereist kan
+          worden
+        </td>
+        <td class="long">
+          <ul>
+            <li>Registratie functie</li>
+            <li>Login functie</li>
+            <li>
+              Alleen ingelogde gebruikers kunnen Create, Update en Delete acties
+              uitvoeren
+            </li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F02</td>
+        <td class="long">
+          Als gebruiker wil ik een lijst van games kunnen zien, zodat ik naar de
+          game die ik wil vinden kan zoeken
+        </td>
+        <td class="long">
+          <ul>
+            <li>Lijst van games</li>
+            <li>Zoek- en Filterfunctie</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F03</td>
+        <td class="long">
+          Als gebruiker wil ik op het ‘games’ scherm de games met de hoogste
+          gemiddelde rating zien, zodat ik kan zien welke games door veel mensen
+          goed beoordeeld worden
+        </td>
+        <td class="long">
+          <ul>
+            <li>Top 5 best gewaardeerde games</li>
+          </ul>
+        </td>
+        <td>Should</td>
+      </tr>
+      <tr>
+        <td>F04</td>
+        <td class="long">
+          Als gebruiker wil ik op een game kunnen klikken om naar de
+          detailpagina van de game te gaan, zodat ik reviews en meer informatie
+          over de game te zien krijg
+        </td>
+        <td class="long">
+          <ul>
+            <li>Game lijst heeft knop naar detailpagina</li>
+            <li>Scherm bevat release dates voor platvormen</li>
+            <li>Scherm bevat gemiddelde review score</li>
+            <li>Scherm toont alle reviews</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F05</td>
+        <td class="long">
+          Als gebruiker wil ik een review achter kunnen laten op een game, zodat
+          ik aan anderen kan laten weten of ik deze game het kopen waard vind.
+        </td>
+        <td class="long">
+          <ul>
+            <li>Detailscherm bevat knop om review toe te voegen</li>
+            <li>Review formulier bevat getal tussen 1 en 10 en een tekstvak</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F06</td>
+        <td class="long">
+          Als gebruiker wil ik een lijst van platvormen kunnen zien, zodat ik
+          kan zien welke platvormen al geregistreerd zijn
+        </td>
+        <td class="long">
+          <ul>
+            <li>Lijst van platvormen</li>
+            <li>Delete knop voor platvormen van ingelogde user</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr class="long">
+        <td>F07</td>
+        <td>
+          Als gebruiker wil ik platvormen toe kunnen voegen, zodat ik games voor
+          die platvormen aan kan maken
+        </td>
+        <td class="long">
+          <ul>
+            <li>
+              Lijst van platvormen bevat formulier om platvorm toe te voegen
+            </li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F08</td>
+        <td class="long">
+          Als gebruiker wil ik een lijst van developers kunnen zien, zodat ik
+          kan zien welke developers al geregistreerd zijn
+        </td>
+        <td class="long">
+          <ul>
+            <li>Lijst van developers</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F09</td>
+        <td class="long">
+          Als gebruiker wil ik op een developer in de developer lijst kunnen
+          klikken om een detail scherm te zien, zodat ik meer informatie, zoals
+          games van de developer, te zien krijg.
+        </td>
+        <td class="long">
+          <ul>
+            <li>Developer lijst heeft een knop naar detailscherm</li>
+            <li>Scherm bevat lijst van games van developer</li>
+            <li>
+              Scherm bevat edit en delete knop als ingelogde gebruiker de
+              eigenaar van de developer is
+            </li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F10</td>
+        <td class="long">
+          Als gebruiker wil ik een game aan een van mijn developers toe kunnen
+          voegen, zodat anderen deze game op GameHub kunnen vinden
+        </td>
+        <td class="long">
+          <ul>
+            <li>
+              ‘Games’ scherm en ‘developer detail’ scherm bevatten knop die naar
+              ‘game formulier’ scherm navigeert
+            </li>
+            <li>Bevat invoerveld voor titel</li>
+            <li>Bevat select voor genre enum</li>
+            <li>Bevat select voor developers van de gebruiker</li>
+            <li>Bevat select voor platvormen en datepicker</li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F11</td>
+        <td class="long">
+          Als gebruiker wil ik een profiel pagina kunnen openen waarin ik kan
+          zien welke developers, games en reviews ik heb toegevoegd, zodat ik
+          snel mijn eigen contributies terug kan vinden
+        </td>
+        <td class="long">
+          <ul>
+            <li>Navbar bevat link naar profiel</li>
+            <li>Profiel bevat 3 tabbladen: Developers, Games en Reviews</li>
+            <li>
+              Ieder tabblad toont de entiteiten in die categorie die door de
+              gebruiker toegevoegd zijn
+            </li>
+          </ul>
+        </td>
+        <td>Must</td>
+      </tr>
+      <tr>
+        <td>F12</td>
+        <td class="long">
+          Als gebruiker wil ik de profielen van anderen kunnen openen, zodat ik
+          kan zien welke contributies deze gebruikers nog meer hebben gemaakt
+        </td>
+        <td class="long">
+          <ul>
+            <li>
+              Games, developers en reviews bevatten een link naar het profiel
+              van de gebruiker die de entiteit heeft aangemaakt
+            </li>
+          </ul>
+        </td>
+        <td>Could</td>
+      </tr>
+    </tbody>
+  </table>
+  <img alt="ERD van het ontwerp" src="/ERD.jpg" />
+</div>

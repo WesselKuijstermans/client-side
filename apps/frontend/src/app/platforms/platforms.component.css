@@ -52,7 +52,7 @@ li form {
 }
 
 li form input, li form select {
-    width: 27%;
+    width: 26%;
     margin-right: 2%;
 }
 
@@ -72,5 +72,23 @@ a:hover {
 }
 
 button {
-  margin-left: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: medium;
+  color: white;
+}
+
+button.delete {
+  background-color: #f44336;
+}
+
+button.cancel {
+  background-color: orange;
+}
+
+button.add {
+  background-color: #4caf50;
 }

@@ -52,6 +52,7 @@ ul {
   border: 2px solid #ccc;
   position: relative;
   z-index: 1;
+  overflow-x: auto;
 }
 
 .game-card {
