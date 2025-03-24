@@ -15,7 +15,7 @@
     </div>
     <ng-template #games>
       <p>
-        Welkom, <b>{{ authService.getUser().name }}</b>! <br />
+        Welkom, <b>{{ authService.getUser()?.name || 'Gebruiker'}}</b>! <br />
         Klik op de knop hieronder om naar de games te gaan.
       </p>
       <button

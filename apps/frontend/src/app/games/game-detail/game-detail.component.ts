@@ -39,13 +39,15 @@ export class GameDetailComponent implements OnInit {
         });
     }
 
-    this.newRating = {
-      rating: 0,
-      review: '',
-      user: this.loggedInUser,
-      game: this.game as GameEntity,
-      created: new Date(),
-    };
+    if (this.loggedInUser) {
+      this.newRating = {
+        rating: 0,
+        review: '',
+        user: this.loggedInUser,
+        game: this.game as GameEntity,
+        created: new Date(),
+      };
+    }
   }
 
   delete(): void {

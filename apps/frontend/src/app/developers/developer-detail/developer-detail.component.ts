@@ -30,7 +30,7 @@ export class DeveloperDetailComponent implements OnInit {
           console.log(data)
           this.developer = data;
           const user = this.authService.getUser();
-          this.isCreator = user.id === this.developer?.createdBy.id;
+          this.isCreator = user?.id === this.developer?.createdBy.id;
         });
     }
   }

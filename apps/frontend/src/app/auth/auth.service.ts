@@ -11,7 +11,7 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey);
   }
 
-  getUser(): UserEntity {
+  getUser(): UserEntity | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
