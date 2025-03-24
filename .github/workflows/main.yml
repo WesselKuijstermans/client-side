@@ -96,7 +96,7 @@ jobs:
               id: deploy-to-webapp
               uses: azure/webapps-deploy@v3
               with:
-                  app-name: 'GameHubWesselK'
+                  app-name: 'WesselKNestJS'
                   slot-name: 'Production'
                   publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
                   package: .
