@@ -31,13 +31,13 @@ import { GamePlatformController } from '../platform/gameplatform.controller';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT) || 5433,
-      username: process.env.DB_USERNAME || 'postgres',
-      password: process.env.DB_PASSWORD || process.env.POSTGRES_PASSWORD,
-      database: process.env.DB_NAME || 'client_side',
-      entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
-      synchronize: true,
+      url: process.env.DB_STRING,
+      ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false
+        }
+      },
       logging: true,
     }),
     TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
