@@ -1,3 +1,29 @@
 <div class="main">
-    <p>landing works!</p>
-</div>
+    <h1>Welkom op GameHub!</h1>
+    <div *ngIf="!isLoggedIn; else games" class="buttons">
+      <p>
+        Op GameHub kunnen gebruikers platvormen, developers en games toevoegen en
+        beoordelen. Om te beginnen, maak een account aan of log in. <br />
+        Veel plezier!
+      </p>
+      <button
+        (click)="router.navigate(['auth'])"
+        (keydown)="router.navigate(['auth'])"
+      >
+        Log in
+      </button>
+    </div>
+    <ng-template #games>
+      <p>
+        Welkom, <b>{{ authService.getUser().name }}</b>! <br />
+        Klik op de knop hieronder om naar de games te gaan.
+      </p>
+      <button
+        (click)="router.navigate(['games'])"
+        (keydown)="router.navigate(['games'])"
+      >
+        Games
+      </button></ng-template
+    >
+  </div>
+  

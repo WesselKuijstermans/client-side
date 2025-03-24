@@ -15,5 +15,8 @@ export class NavbarComponent {
 
   logout() {
     this.authService.removeToken();
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }
