@@ -6,25 +6,21 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:build",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "target": "node",
         "outputPath": "dist/apps/nest-app",
         "main": "apps/nest-app/src/main.ts",
         "tsConfig": "apps/nest-app/tsconfig.app.json",
         "assets": ["apps/nest-app/src/assets"],
+        "webpackConfig": "apps/nest-app/webpack.config.js",
         "generatePackageJson": true
       },
       "configurations": {
         "production": {
           "optimization": true,
-          "extractLicenses": true,
-          "inspect": false
-        },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "inspect": true
+          "outputHashing": "all"
         }
       }
     },

@@ -20,6 +20,16 @@
   },
   "nxCloudId": "673c6fb1045720293eab3bfb",
   "targetDefaults": {
+    "@nx/node:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/nest:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
     "@angular-devkit/build-angular:browser": {
       "cache": true,
       "dependsOn": ["^build"],
