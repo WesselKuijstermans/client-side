@@ -25,31 +25,63 @@ import { PlatformController } from '../platform/platform.controller';
 import { PlatformService } from '../platform/platform.service';
 import { GamePlatformService } from '../platform/gameplatform.service';
 import { GamePlatformController } from '../platform/gameplatform.controller';
+import * as pg from 'pg-connection-string';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT) || 5432,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      ssl: {
-        rejectUnauthorized: false,
+    TypeOrmModule.forRootAsync({
+      useFactory: () => {
+        const dbConfig = pg.parse(process.env.DB_STRING);
+        return {
+          type: 'postgres',
+          host: dbConfig.host,
+          port: parseInt(dbConfig.port),
+          username: dbConfig.user,
+          password: dbConfig.password,
+          database: dbConfig.database,
+          ssl: {
+            rejectUnauthorized: false,
+          },
+          entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
+          synchronize: false,
+          logging: true,
+        };
       },
-      entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
-      synchronize: false,
-      logging: true,
     }),
-    TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
+    TypeOrmModule.forFeature([
+      Developer,
+      Game,
+      Rating,
+      User,
+      Auth,
+      Platform,
+      GamePlatform,
+    ]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AppController, UserController, AuthController, DeveloperController, GameController, RatingController, PlatformController, GamePlatformController],
-  providers: [AppService, UserService, AuthService, DeveloperService, GameService, RatingService, PlatformService, GamePlatformService],
+  controllers: [
+    AppController,
+    UserController,
+    AuthController,
+    DeveloperController,
+    GameController,
+    RatingController,
+    PlatformController,
+    GamePlatformController,
+  ],
+  providers: [
+    AppService,
+    UserService,
+    AuthService,
+    DeveloperService,
+    GameService,
+    RatingService,
+    PlatformService,
+    GamePlatformService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
