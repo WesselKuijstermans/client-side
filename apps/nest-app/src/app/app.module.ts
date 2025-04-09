@@ -26,18 +26,20 @@ import { PlatformService } from '../platform/platform.service';
 import { GamePlatformService } from '../platform/gameplatform.service';
 import { GamePlatformController } from '../platform/gameplatform.controller';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DB_STRING,
-      ssl: true,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false
-        }
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      ssl: {
+        rejectUnauthorized: false,
       },
+      entities: [Developer, Game, Rating, User, Auth, Platform, GamePlatform],
+      synchronize: false,
       logging: true,
     }),
     TypeOrmModule.forFeature([Developer, Game, Rating, User, Auth, Platform, GamePlatform]),
@@ -51,9 +53,6 @@ import { GamePlatformController } from '../platform/gameplatform.controller';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(Middleware)
-      .forRoutes('*');
+    consumer.apply(Middleware).forRoutes('*');
   }
-
 }

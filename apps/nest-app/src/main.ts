@@ -8,6 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
+  console.log('DB_STRING:', process.env.DB_STRING || '❌ UNDEFINED ❌');
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: ['https://polite-water-03a063e03.6.azurestaticapps.net/', 'http://localhost:4200'],	
