@@ -1,6 +1,7 @@
 <div class="main">
   <div class="platform-selector">
     <select #platformSelect (change)="addGamePlatform(platformSelect.value)">
+      <option value="" disabled selected>Select a platform</option>
       <option *ngFor="let platform of platforms" [value]="platform.id">
         {{ platform.name }}
       </option>
