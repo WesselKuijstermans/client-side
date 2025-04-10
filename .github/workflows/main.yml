@@ -86,8 +86,14 @@ jobs:
               with:
                   name: nest-app
 
+            - name: List files
+              run: ls -la
+
             - name: Unzip artifact for deployment
               run: unzip nest-app-master.zip
+
+            - name: List files
+              run: ls -la
 
             - name: Install dependencies
               run: npm install
