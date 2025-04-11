@@ -37,13 +37,15 @@ export class RatingService {
     const reqId = this.authService.verifyAuthHeader(
       req.headers['authorization']
     );
-    const game = await this.gameService.findById(rating.gameId);
-    const user = await this.userService.findById(rating.userId);
-    if (reqId !== user.id) {
+    const game = await this.gameService.findById(rating.game.id);
+    const user = await this.userService.findById(rating.user.id);
+    if (reqId != user.id) {
       throw new UnauthorizedException('Unauthorized');
     }
     rating.game = game;
     rating.user = user;
+    rating.gameId = game.id;
+    rating.userId = user.id;
     return this.ratingRepository.save(rating);
   }
 
