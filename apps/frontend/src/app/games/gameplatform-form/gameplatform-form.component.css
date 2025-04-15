@@ -65,3 +65,13 @@ button.delete:hover {
 .buttons {
     display: inline-block
 }
+
+button.back {
+  background: none;
+  border: none;
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}

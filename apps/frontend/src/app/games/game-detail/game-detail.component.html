@@ -41,6 +41,7 @@
       {{ platform?.releaseDate | date : 'd MMMM yyyy' }}
     </p>
     <button
+    *ngIf="isCreatorOfDeveloper()"
       class="edit"
       (click)="router.navigate(['games/platform-form', game?.id])"
     >

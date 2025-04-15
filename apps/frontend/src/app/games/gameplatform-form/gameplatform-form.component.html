@@ -1,4 +1,13 @@
 <div class="main">
+<button
+  class="back"
+  (click)="this.router.navigate(['games/', gameId.toString()])"
+  (keydown.enter)="this.router.navigate(['games/', gameId.toString()])"
+  (keydown.space)="this.router.navigate(['games/', gameId.toString()]); $event.preventDefault()"
+>
+  ← Back to Game
+</button>
+  <h1>Editing platforms</h1>
   <div class="platform-selector">
     <select #platformSelect (change)="addGamePlatform(platformSelect.value)">
       <option value="" disabled selected>Select a platform</option>

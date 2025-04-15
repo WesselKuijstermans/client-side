@@ -19,7 +19,7 @@ export class GameplatformFormComponent implements OnInit {
   gameId!: number;
   platforms: PlatformEntity[] = [];
 
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
     this.gameId = parseInt(this.router.url.split('/').pop() || '', 10);
@@ -48,6 +48,7 @@ export class GameplatformFormComponent implements OnInit {
       console.error('Platform not found');
     }
   }
+
   delete(gamePlatform: GamePlatformEntity): void {
     fetch(
       `${this.baseUrl}/gameplatform/game/${gamePlatform.gameId}/platform/${gamePlatform.platformId}`,

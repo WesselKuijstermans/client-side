@@ -113,4 +113,8 @@ export class GameDetailComponent implements OnInit {
   hasReviewed(): boolean {
     return this.game?.ratings.some( rating => rating.user.id === this.loggedInUser?.id) ?? false;
   }
+
+  isCreatorOfDeveloper(): boolean {
+    return this.loggedInUser?.id === this.game?.developer.createdBy?.id;
+  }
 }
